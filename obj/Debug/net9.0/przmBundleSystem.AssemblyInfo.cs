@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("przmBundleSystem")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7bdf2609aee027121fbe784ec038d51a01bde48b")]
 [assembly: System.Reflection.AssemblyProductAttribute("przmBundleSystem")]
 [assembly: System.Reflection.AssemblyTitleAttribute("przmBundleSystem")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

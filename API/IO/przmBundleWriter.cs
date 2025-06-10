@@ -11,13 +11,13 @@ using przmBundleSystem.API.Core;
 // This takes your lovingly crafted mod folder and turns it into a fat encrypted meatball of game content.
 namespace przmBundleSystem.API.IO
 {
-	public static class PrzmBundleWriter
+	public static class przmBundleWriter
 	{
 		public static void WriteBundle(
 			string inputDirectory,
 			string outputFilePath,
-			DevKeyManager.DevKey devKey,
-			CompressionType compressionType = CompressionType.LZ4)
+			devKeyManager.DevKey devKey,
+			compressionType compressionType = compressionType.LZ4)
 		{
 			if (!Directory.Exists(inputDirectory))
 			{
@@ -25,7 +25,7 @@ namespace przmBundleSystem.API.IO
 				return;
 			}
 
-			var fileEntries = new List<PrzmFileEntry>();
+			var fileEntries = new List<przmFileEntry>();
 			using var outStream = new FileStream(outputFilePath, FileMode.Create, FileAccess.Write);
 			using var writer = new BinaryWriter(outStream);
 
@@ -43,16 +43,16 @@ namespace przmBundleSystem.API.IO
 				byte[] compressed = PrzmCompressor.Compress(fileData, compressionType);
 
 				// Encrypt
-				byte[] encrypted = PrzmEncryptor.Encrypt(compressed, DevKeyManager.GetRawKey(devKey));
+				byte[] encrypted = przmEncryptor.Encrypt(compressed, devKeyManager.GetRawKey(devKey));
 
 				// Save file entry
-				var entry = new PrzmFileEntry
+				var entry = new przmFileEntry
 				{
 					FilePath = relativePath,
 					Offset = currentOffset,
 					CompressedSize = encrypted.Length,
 					OriginalSize = fileData.Length,
-					Hash = HashUtils.ComputeSHA256(fileData)
+					Hash = hashUtils.ComputeSha256(fileData)
 				};
 
 				fileEntries.Add(entry);

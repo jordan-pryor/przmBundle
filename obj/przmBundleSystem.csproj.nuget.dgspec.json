@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "Z:\\VCS\\studio-prism\\VIEN\\In-Dev\\przmBundleSystem\\przmBundleSystem.csproj": {}
+    "D:\\VCS\\Studio Prism\\Projects\\przmBundle\\przmBundleSystem.csproj": {}
   },
   "projects": {
-    "Z:\\VCS\\studio-prism\\VIEN\\In-Dev\\przmBundleSystem\\przmBundleSystem.csproj": {
+    "D:\\VCS\\Studio Prism\\Projects\\przmBundle\\przmBundleSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "Z:\\VCS\\studio-prism\\VIEN\\In-Dev\\przmBundleSystem\\przmBundleSystem.csproj",
+        "projectUniqueName": "D:\\VCS\\Studio Prism\\Projects\\przmBundle\\przmBundleSystem.csproj",
         "projectName": "przmBundleSystem",
-        "projectPath": "Z:\\VCS\\studio-prism\\VIEN\\In-Dev\\przmBundleSystem\\przmBundleSystem.csproj",
-        "packagesPath": "C:\\Users\\jnpry\\.nuget\\packages\\",
-        "outputPath": "Z:\\VCS\\studio-prism\\VIEN\\In-Dev\\przmBundleSystem\\obj\\",
+        "projectPath": "D:\\VCS\\Studio Prism\\Projects\\przmBundle\\przmBundleSystem.csproj",
+        "packagesPath": "C:\\Users\\Jorda\\.nuget\\packages\\",
+        "outputPath": "D:\\VCS\\Studio Prism\\Projects\\przmBundle\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\jnpry\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Jorda\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -35,7 +35,6 @@
           }
         },
         "warningProperties": {
-          "allWarningsAsErrors": true,
           "warnAsError": [
             "NU1605"
           ]
@@ -61,23 +60,12 @@
             },
             "System.Text.Json": {
               "target": "Package",
-              "version": "[10.0.0-preview.5.25277.114, )"
+              "version": "[9.0.5, )"
             },
             "ZstdSharp.Port": {
               "target": "Package",
               "version": "[0.8.5, )"
             }
-          },
-          "centralPackageVersions": {
-            "Facepunch.Steamworks": "2.3.3",
-            "JoltPhysicsSharp": "2.16.2",
-            "NLua": "1.7.5",
-            "ppy.SDL3-CS": "2025.220.0",
-            "Silk.NET": "2.22.0",
-            "Silk.NET.Input": "2.22.0",
-            "Silk.NET.Maths": "2.22.0",
-            "Silk.NET.OpenGL": "2.22.0",
-            "Silk.NET.Windowing": "2.22.0"
           },
           "imports": [
             "net461",
