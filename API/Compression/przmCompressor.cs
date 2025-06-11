@@ -9,17 +9,17 @@ namespace przmBundleSystem.API.Compression
 	public static class PrzmCompressor
 	{
 		// This method takes your fat, juicy bytes and slims them down like a gym membership ad.
-		public static byte[] Compress(byte[] data, CompressionType type)
+		public static byte[] Compress(byte[] data, compressionType type)
 		{
 			switch (type)
 			{
-				case CompressionType.None:
+				case compressionType.None:
 					return data; // raw and uncompressed — the protein shake of bundles.
 
-				case CompressionType.LZ4:
+				case compressionType.LZ4:
 					return LZ4Pickler.Pickle(data); // ultra-fast, mildly effective.
 
-				case CompressionType.ZSTD:
+				case compressionType.ZSTD:
 					throw new NotImplementedException("ZSTD compression is not implemented yet. Install ZstdNet and update this method.");
 
 				default:
@@ -28,17 +28,17 @@ namespace przmBundleSystem.API.Compression
 		}
 
 		// This method takes compressed data and reinflates it like a sad beach ball on a summer day.
-		public static byte[] Decompress(byte[] compressedData, CompressionType type)
+		public static byte[] Decompress(byte[] compressedData, compressionType type)
 		{
 			switch (type)
 			{
-				case CompressionType.None:
+				case compressionType.None:
 					return compressedData;
 
-				case CompressionType.LZ4:
+				case compressionType.LZ4:
 					return LZ4Pickler.Unpickle(compressedData); // quick decompression for snappy game loading.
 
-				case CompressionType.ZSTD:
+				case compressionType.ZSTD:
 					throw new NotImplementedException("ZSTD decompression is not implemented yet. Install ZstdNet and update this method.");
 
 				default:

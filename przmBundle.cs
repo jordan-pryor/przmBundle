@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Updated version of PrzmBundle.cs to work with the defined structure and methods
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using przmBundleSystem.API.Compression;
@@ -7,14 +9,13 @@ using przmBundleSystem.API.Utils;
 using przmBundleSystem.API.Encryption;
 using przmBundleSystem.API.IO;
 
-
 // This is the brains of the whole PRZM operation — think of it as the Command Center for mod squishery and bundle tomfoolery.
 namespace przmBundleSystem
 {
-	public static class PrzmBundle
+	public static class przmBundle
 	{
 		// This is where the magic starts — Pack your folder into a shiny `.przm` like a magician stuffing rabbits into a hat.
-		public static void PackFromFolder(string sourceFolder, string outputPath, string devKeyPath, compressionType compression = compressionType.LZ4, bool encrypt = true)
+		public static void PackFromFolder(string sourceFolder, string outputPath, string devKeyPath, compressionType compression = compressionType.LZ4)
 		{
 			if (!Directory.Exists(sourceFolder))
 				throw new DirectoryNotFoundException($"The source folder '{sourceFolder}' does not exist.");
@@ -22,9 +23,7 @@ namespace przmBundleSystem
 			Logger.Log($"[PRZM] Packing bundle from '{sourceFolder}'...");
 
 			var devKey = devKeyManager.LoadKey(devKeyPath);
-
-			przmBundleWriter writer = new przmBundleWriter();
-			writer.Pack(sourceFolder, outputPath, devKey, compression, encrypt);
+			przmBundleWriter.WriteBundle(sourceFolder, outputPath, devKey, compression);
 
 			Logger.Log($"[PRZM] Bundle packed to '{outputPath}' successfully.");
 		}
@@ -38,8 +37,15 @@ namespace przmBundleSystem
 			Logger.Log($"[PRZM] Unpacking bundle '{przmPath}' to '{outputFolder}'...");
 
 			var devKey = devKeyManager.LoadKey(devKeyPath);
-			przmBundleReader reader = new przmBundleReader();
-			reader.Unpack(przmPath, outputFolder, devKey);
+			var reader = new przmBundleReader(przmPath, devKey);
+
+			foreach (var file in reader.ListFiles())
+			{
+				var outputFilePath = Path.Combine(outputFolder, file);
+				Directory.CreateDirectory(Path.GetDirectoryName(outputFilePath)!);
+				File.WriteAllBytes(outputFilePath, reader.Extract(file));
+				Logger.Log($"[PRZM] + {file}", Logger.LogLevel.Success);
+			}
 
 			Logger.Log($"[PRZM] Unpacked to '{outputFolder}' successfully.");
 		}
@@ -53,25 +59,26 @@ namespace przmBundleSystem
 			Logger.Log($"[PRZM] Loading bundle into memory from '{przmPath}'...");
 
 			var devKey = devKeyManager.LoadKey(devKeyPath);
-			przmBundleReader reader = new przmBundleReader();
-			reader.Load(przmPath, devKey);
+			var reader = new przmBundleReader(przmPath, devKey);
 
 			Logger.Log($"[PRZM] Bundle loaded successfully.");
 			return reader;
 		}
 
 		// This is the snack-sized method — grab one file from the bundle like a single Pringle™ from the tube.
-		public static byte[] ReadFile(string przmPath, string fileName, string devKeyPath)
+		public static byte[]? ReadFile(string przmPath, string fileName, string devKeyPath)
 		{
 			var reader = LoadFromFile(przmPath, devKeyPath);
 
-			if (!reader.FileExists(fileName))
+			try
 			{
-				Logger.Log($"[PRZM] File '{fileName}' not found in bundle.");
+				return reader.Extract(fileName);
+			}
+			catch (Exception e)
+			{
+				Logger.Log($"[PRZM] File '{fileName}' not found or failed to extract: {e.Message}", Logger.LogLevel.Warning);
 				return null;
 			}
-
-			return reader.ReadFile(fileName);
 		}
 	}
 }

@@ -1,20 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <RootNamespace>przmBundleSystem</RootNamespace>
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <OutputType>Exe</OutputType>
+        <StartupObject>przmBundleSystem.CMD.przmCMDLine</StartupObject>
     </PropertyGroup>
-
+    
     <ItemGroup>
       <PackageReference Include="K4os.Compression.LZ4" Version="1.3.8" />
       <PackageReference Include="Rijndael256" Version="3.2.0" />
-      <PackageReference Include="System.Text.Json" Version="10.0.0-preview.5.25277.114" />
+      <PackageReference Include="System.Text.Json" Version="9.0.5" />
       <PackageReference Include="ZstdSharp.Port" Version="0.8.5" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="API\" />
+        <Folder Include="CMD\" />
+        <Folder Include="UI\ModBundler\" />
+        <Folder Include="UI\StudioBundler\" />
     </ItemGroup>
 
 </Project>
